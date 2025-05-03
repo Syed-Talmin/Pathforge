@@ -1,8 +1,8 @@
 import React, { use, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { RaodmapContext } from "../context/RaodmapContext";
-import { toast} from "react-toastify";
-import { fetchTopicResponse } from "../api/aiTopicResponse"
+import { toast } from "react-toastify";
+import { fetchTopicResponse } from "../api/aiTopicResponse";
 
 const RoadmapDetails = () => {
   const { id, dets } = useParams();
@@ -11,7 +11,7 @@ const RoadmapDetails = () => {
   const [getRoadmap, setGetRoadmap] = useState([]);
   const [roadmap, setRoadmap] = useState([]);
   const [savedBtn, setSavedBtn] = useState(false);
-  const[isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -110,30 +110,28 @@ const RoadmapDetails = () => {
 
   const handleTopicDetails = async (skill, topic) => {
     try {
-      setIsLoading(true)
-      const res =  await fetchTopicResponse(skill, topic)
+      setIsLoading(true);
+      const res = await fetchTopicResponse(skill, topic);
       navigate("/topic-details", {
-        state: { data: res},
+        state: { data: res },
       });
-      
     } catch (error) {
       console.error("Error fetching topic response:", error);
       toast.error("Failed to fetch topic details.");
-      
+    } finally {
+      setIsLoading(false);
     }
-    finally{
-      setIsLoading(false)
-    }
-    
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-[#2d2d2d68]">
+        <div className="spin w-13 h-13 rounded-full border-r-3 border-l-3 border-t-3"></div>
+        <h4 className="text-xl text-center">Please wait , Loading...</h4>
+      </div>
+    );
   }
 
-    
-  if (isLoading) {
-    return <div className='flex items-center justify-center h-screen bg-[#2d2d2d68]'>
-            <div className="spin w-13 h-13 rounded-full border-r-3 border-l-3 border-t-3"></div>
-    </div>;
-  }
-  
   return (
     <div className="py-20 px-4 md:flex md:items-center md:justify-center">
       <div className="md:p-5 md:w-fit">
@@ -184,17 +182,23 @@ const RoadmapDetails = () => {
                     ) : (
                       <h4 className="text-sm font-semibold">{index + 1}.</h4>
                     )}
-                    <label onClick={()=>{
-                      if (dets === "learning") {
-                        handleTopicDetails(el.skill, e.name);
-                      }
-                    }} className="text-sm tracking-tight active:bg-blue-200 p-2 w-full rounded-md" htmlFor={e.name}>
+                    <label
+                      onClick={() => {
+                        if (dets === "learning") {
+                          handleTopicDetails(el.skill, e.name);
+                        }
+                      }}
+                      className={`text-sm tracking-tight ${
+                        isDark ? "bg-[#1e1e1e]" : "bg-[#e9e9e9]"
+                      }  p-2 w-full rounded-md`}
+                      htmlFor={e.name}
+                    >
                       {e.name}
                     </label>
                   </div>
                 ))}
                 {idx > 0 && (
-                  <p className="text-sm px-2 pb-3 border-b-1 border-zinc-500 uppercase text-end mt-[-10px]">
+                  <p className="text-sm px-2 pb-3 border-b-1 border-zinc-500 uppercase text-end">
                     {el.duration}
                   </p>
                 )}

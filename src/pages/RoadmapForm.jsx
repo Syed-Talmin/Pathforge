@@ -27,10 +27,10 @@ const RoadmapForm = () => {
         
         try{
                 const data = await fetchApi(goal);
+                console.log(data);
+                
                 if (data) {
-                    const parsedData = JSON.parse(data);
-                    setRoadmap(parsedData);
-
+                    setRoadmap(data);
                 } else {
                     setError("Unreachable, No data received. Please try again.");
                 }

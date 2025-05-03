@@ -28,7 +28,7 @@ My topic is: ${topic}
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: `${import.meta.env.VITE_AI_MODEL}`,
+          model: `${import.meta.env.VITE_TOPIC_AI_MODEL}`,
           messages: [
             {
               role: 'user',

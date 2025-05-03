@@ -11,7 +11,7 @@ const ShowTopicDetails = () => {
     const { data } = state || {};
 
   return (
-    <div className="max-w-full py-20 px-4 ">
+    <div className="markdown max-w-full py-20 px-4 ">
       <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]} children={data} />
     </div>
   );

@@ -3,8 +3,38 @@
   animation: loader 2s ease-in-out infinite;
 }
 
+.markdown h1{
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 1rem;
 
+}
+.markdown h2{
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1;
+  margin: 1rem 0;
 
+}
+.markdown h3{
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 1rem 0;
+
+}
+.markdown p{
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 1rem 0;
+
+}
+.markdown hr{
+  border: 1px solid #8f8f8f;
+  margin: 2rem 0;
+}
 @keyframes loader {
   0%{
     transform: rotate(0deg);
